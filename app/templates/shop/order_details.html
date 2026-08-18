@@ -1,0 +1,525 @@
+{% extends "base.html" %}
+
+{% block title %}
+Order #{{ order.id }} - ElectroShop
+{% endblock %}
+
+
+{% block content %}
+
+<section class="order-details-section py-5">
+
+    <div class="container">
+
+        <!-- =================================
+             HEADER
+        ================================== -->
+
+        <div class="order-details-header mb-4">
+
+            <div>
+
+                <span class="order-label">
+
+                    <i class="bi bi-receipt me-1"></i>
+
+                    ORDER DETAILS
+
+                </span>
+
+                <h1 class="fw-bold mt-2 mb-1">
+
+                    Order #{{ order.id }}
+
+                </h1>
+
+                <p class="text-muted mb-0">
+
+                    Review your order information and products.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('shop.my_order') }}"
+                class="btn btn-outline-dark"
+            >
+
+                <i class="bi bi-arrow-left me-1"></i>
+
+                My Orders
+
+            </a>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- =================================
+                 LEFT SIDE
+            ================================== -->
+
+            <div class="col-lg-8">
+
+
+                <!-- CUSTOMER INFORMATION -->
+
+                <div class="order-details-card mb-4">
+
+                    <div class="order-card-header">
+
+                        <h5 class="fw-bold mb-0">
+
+                            <i class="bi bi-person-circle me-2"></i>
+
+                            Customer Information
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="order-card-body">
+
+                        <div class="row g-4">
+
+
+                            <!-- NAME -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Full Name
+                                        </small>
+
+                                        <strong>
+                                            {{ order.full_name }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PHONE -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-telephone"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Phone
+                                        </small>
+
+                                        <strong>
+                                            {{ order.phone }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-geo-alt"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Delivery Address
+                                        </small>
+
+                                        <strong>
+                                            {{ order.address }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ORDER STATUS -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-truck"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Order Status
+                                        </small>
+
+                                        <div>
+
+                                            {% if order.status == "pending" %}
+
+                                            <span class="badge bg-warning text-dark">
+                                                Pending
+                                            </span>
+
+                                            {% elif order.status == "processing" %}
+
+                                            <span class="badge bg-info">
+                                                Processing
+                                            </span>
+
+                                            {% elif order.status == "paid" %}
+
+                                            <span class="badge bg-success">
+                                                Paid
+                                            </span>
+
+                                            {% elif order.status == "shipping" %}
+
+                                            <span class="badge bg-primary">
+                                                Shipping
+                                            </span>
+
+                                            {% elif order.status == "delivered" %}
+
+                                            <span class="badge bg-success">
+                                                Delivered
+                                            </span>
+
+                                            {% elif order.status == "canceled" %}
+
+                                            <span class="badge bg-danger">
+                                                Canceled
+                                            </span>
+
+                                            {% else %}
+
+                                            <span class="badge bg-secondary">
+                                                {{ order.status }}
+                                            </span>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     ORDERED PRODUCTS
+                ================================== -->
+
+                <div class="order-details-card">
+
+                    <div class="order-card-header">
+
+                        <h5 class="fw-bold mb-0">
+
+                            <i class="bi bi-cart3 me-2"></i>
+
+                            Ordered Products
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="order-products-body">
+
+                        {% for item in order.items %}
+
+                        <div class="order-product">
+
+                            <!-- PRODUCT IMAGE -->
+
+                            <div class="order-product-image">
+
+                                <img
+                                    src="{{url_for('static',filename='uploads/products/' ~(item.product.image or 'default.png')
+                                    ) }}"
+                                    alt="{{ item.product.name }}"
+                                >
+
+                            </div>
+
+
+                            <!-- PRODUCT NAME -->
+
+                            <div class="order-product-info">
+
+                                <h6 class="fw-bold mb-1">
+
+                                    {{ item.product.name }}
+
+                                </h6>
+
+                                <small class="text-muted">
+
+                                    Price:
+                                    TSh
+                                    {{ "{:,.0f}".format(item.price) }}
+
+                                </small>
+
+                            </div>
+
+
+                            <!-- QUANTITY -->
+
+                            <div class="order-product-quantity">
+
+                                <small class="text-muted d-block">
+                                    Quantity
+                                </small>
+
+                                <strong>
+                                    {{ item.quantity }}
+                                </strong>
+
+                            </div>
+
+
+                            <!-- SUBTOTAL -->
+
+                            <div class="order-product-total">
+
+                                <small class="text-muted d-block">
+                                    Subtotal
+                                </small>
+
+                                <strong>
+
+                                    TSh
+                                    {{ "{:,.0f}".format(
+                                        item.subtotal()
+                                    ) }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 RIGHT SIDE
+            ================================== -->
+
+            <div class="col-lg-4">
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="order-summary-card">
+
+                    <div class="order-summary-header">
+
+                        <h5 class="fw-bold mb-0">
+
+                            <i class="bi bi-receipt me-2"></i>
+
+                            Order Summary
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="order-summary-body">
+
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <span class="text-muted">
+
+                                Order Number
+
+                            </span>
+
+                            <strong>
+
+                                #{{ order.id }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <span class="text-muted">
+
+                                Payment
+
+                            </span>
+
+                            <span>
+
+                                {% if order.payment_status == "paid" %}
+
+                                <span class="badge bg-success">
+                                    Paid
+                                </span>
+
+                                {% elif order.payment_status == "pending" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Pending
+                                </span>
+
+                                {% elif order.payment_status == "failed" %}
+
+                                <span class="badge bg-danger">
+                                    Failed
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-secondary">
+                                    Unpaid
+                                </span>
+
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <div class="d-flex justify-content-between">
+
+                            <span class="fw-bold">
+
+                                Total
+
+                            </span>
+
+                            <strong class="order-total">
+
+                                TSh
+                                {{ "{:,.0f}".format(order.total) }}
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- HELP -->
+
+                <div class="order-help mt-3">
+
+                    <i class="bi bi-headset"></i>
+
+                    <div>
+
+                        <h6 class="fw-bold mb-1">
+
+                            Need help?
+
+                        </h6>
+
+                        <p class="text-muted small mb-0">
+
+                            Contact our support team if you
+                            have any questions about this order.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTINUE SHOPPING -->
+
+                <a
+                    href="{{ url_for('shop.product') }}"
+                    class="btn btn-warning
+                           fw-bold
+                           w-100
+                           mt-3
+                           py-3"
+                >
+
+                    <i class="bi bi-shop me-2"></i>
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

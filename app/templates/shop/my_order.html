@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Orders - ElectroShop
+{% endblock %}
+
+
+{% block content %}
+
+<section class="my-orders-section py-5">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="my-orders-header mb-4">
+
+            <div>
+
+                <span class="orders-label">
+                    <i class="bi bi-bag-check me-1"></i>
+                    MY ORDERS
+                </span>
+
+                <h1 class="fw-bold mt-2 mb-1">
+                    My Orders
+                </h1>
+
+                <p class="text-muted mb-0">
+                    Track and view your previous orders.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ url_for('shop.product') }}"
+                class="btn btn-warning fw-semibold"
+            >
+
+                <i class="bi bi-shop me-1"></i>
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+
+        {% if orders %}
+
+        <!-- ORDERS -->
+
+        <div class="orders-list">
+
+            {% for order in orders %}
+
+            <div class="my-order-card">
+
+                <div class="my-order-main">
+
+
+                    <!-- ORDER ICON -->
+
+                    <div class="my-order-icon">
+
+                        <i class="bi bi-box-seam"></i>
+
+                    </div>
+
+
+                    <!-- ORDER INFO -->
+
+                    <div class="my-order-info">
+
+                        <div class="d-flex
+                                    align-items-center
+                                    gap-2
+                                    flex-wrap">
+
+                            <h5 class="fw-bold mb-0">
+
+                                Order #{{ order.id }}
+
+                            </h5>
+
+
+                            <!-- STATUS -->
+
+                            {% if order.status == "pending" %}
+
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+
+                            {% elif order.status == "processing" %}
+
+                            <span class="badge bg-info">
+                                Processing
+                            </span>
+
+                            {% elif order.status == "paid" %}
+
+                            <span class="badge bg-success">
+                                Paid
+                            </span>
+
+                            {% elif order.status == "shipping" %}
+
+                            <span class="badge bg-primary">
+                                Shipping
+                            </span>
+
+                            {% elif order.status == "delivered" %}
+
+                            <span class="badge bg-success">
+                                Delivered
+                            </span>
+
+                            {% elif order.status == "canceled" %}
+
+                            <span class="badge bg-danger">
+                                Canceled
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-secondary">
+                                {{ order.status }}
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="my-order-meta mt-2">
+
+                            <span>
+
+                                <i class="bi bi-calendar3 me-1"></i>
+
+                                {% if order.created_at %}
+
+                                    {{ order.created_at.strftime(
+                                        '%d %b %Y'
+                                    ) }}
+
+                                {% endif %}
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="bi bi-person me-1"></i>
+
+                                {{ order.full_name }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="my-order-total">
+
+                        <small class="text-muted d-block">
+                            Total
+                        </small>
+
+                        <strong>
+
+                            TSh
+                            {{ "{:,.0f}".format(order.total) }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- VIEW -->
+
+                    <div class="my-order-action">
+
+                        <a
+                            href="{{ url_for(
+                                'shop.confirm_order',
+                                order_id=order.id
+                            ) }}"
+                            class="btn btn-outline-dark"
+                        >
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            View
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT STATUS -->
+
+                <div class="my-order-footer">
+
+                    <span class="text-muted">
+
+                        <i class="bi bi-credit-card me-1"></i>
+
+                        Payment
+
+                    </span>
+
+
+                    {% if order.payment_status == "paid" %}
+
+                    <span class="payment-paid">
+
+                        <i class="bi bi-check-circle-fill me-1"></i>
+
+                        Paid
+
+                    </span>
+
+                    {% elif order.payment_status == "pending" %}
+
+                    <span class="payment-pending">
+
+                        <i class="bi bi-clock me-1"></i>
+
+                        Pending
+
+                    </span>
+
+                    {% elif order.payment_status == "failed" %}
+
+                    <span class="payment-failed">
+
+                        <i class="bi bi-x-circle-fill me-1"></i>
+
+                        Failed
+
+                    </span>
+
+                    {% else %}
+
+                    <span class="payment-unpaid">
+
+                        <i class="bi bi-dash-circle me-1"></i>
+
+                        Unpaid
+
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <!-- EMPTY ORDERS -->
+
+        <div class="empty-orders">
+
+            <div class="empty-orders-icon">
+
+                <i class="bi bi-bag-x"></i>
+
+            </div>
+
+            <h4 class="fw-bold mt-3">
+                No Orders Yet
+            </h4>
+
+            <p class="text-muted">
+                You haven't placed any orders yet.
+            </p>
+
+            <a
+                href="{{ url_for('shop.product') }}"
+                class="btn btn-warning fw-bold mt-2"
+            >
+
+                <i class="bi bi-cart3 me-1"></i>
+
+                Start Shopping
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

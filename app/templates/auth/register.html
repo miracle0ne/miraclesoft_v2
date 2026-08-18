@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Account - ElectroShop
+{% endblock %}
+
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+
+                <div class="auth-card">
+
+
+                    <!-- HEADER -->
+
+                    <div class="auth-header text-center">
+
+                        <div class="auth-icon">
+
+                            <i class="bi bi-person-plus-fill"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold mt-3 mb-1">
+
+                            Create Account
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Join ElectroShop today
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- FORM -->
+
+                    <form method="POST"
+                          class="mt-4">
+
+                        {{ form.hidden_tag() }}
+
+
+                        <!-- NAME -->
+
+                        <div class="mb-3">
+
+                            {{ form.name.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            {{ form.name(
+                                class="form-control form-control-lg",
+                                placeholder="Enter your full name",
+                                autocomplete="name"
+                            ) }}
+
+
+                            {% for error in form.name.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                <i class="bi bi-exclamation-circle me-1"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="mb-3">
+
+                            {{ form.email.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            {{ form.email(
+                                class="form-control form-control-lg",
+                                placeholder="Enter your email",
+                                autocomplete="email"
+                            ) }}
+
+
+                            {% for error in form.email.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                <i class="bi bi-exclamation-circle me-1"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="mb-3">
+
+                            {{ form.password.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            <div class="input-group">
+
+                                {{ form.password(
+                                    class="form-control form-control-lg",
+                                    placeholder="Create a password",
+                                    autocomplete="new-password"
+                                ) }}
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    onclick="toggleRegisterPassword(
+                                        'password',
+                                        'passwordIcon'
+                                    )">
+
+                                    <i
+                                        class="bi bi-eye"
+                                        id="passwordIcon">
+                                    </i>
+
+                                </button>
+
+                            </div>
+
+
+                            {% for error in form.password.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                <i class="bi bi-exclamation-circle me-1"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- CONFIRM PASSWORD -->
+
+                        <div class="mb-4">
+
+                            {{ form.confirm_password.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            <div class="input-group">
+
+                                {{ form.confirm_password(
+                                    class="form-control form-control-lg",
+                                    placeholder="Confirm your password",
+                                    autocomplete="new-password"
+                                ) }}
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    onclick="toggleRegisterPassword(
+                                        'confirm_password',
+                                        'confirmPasswordIcon'
+                                    )">
+
+                                    <i
+                                        class="bi bi-eye"
+                                        id="confirmPasswordIcon">
+                                    </i>
+
+                                </button>
+
+                            </div>
+
+
+                            {% for error in form.confirm_password.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                <i class="bi bi-exclamation-circle me-1"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- SUBMIT -->
+
+                        {{ form.submit(
+                            class="btn btn-warning
+                                   btn-lg w-100
+                                   fw-bold auth-submit"
+                        ) }}
+
+
+                    </form>
+
+
+                    <!-- LOGIN LINK -->
+
+                    <div class="text-center mt-4">
+
+                        <span class="text-muted">
+
+                            Already have an account?
+
+                        </span>
+
+                        <a
+                            href="{{ url_for('auth.login') }}"
+                            class="fw-semibold text-decoration-none">
+
+                            Login
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- TRUST -->
+
+                    <div class="auth-trust mt-4">
+
+                        <div>
+
+                            <i class="bi bi-shield-check"></i>
+
+                            Secure Registration
+
+                        </div>
+
+                        <div>
+
+                            <i class="bi bi-lock"></i>
+
+                            Your data is protected
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+function toggleRegisterPassword(
+    fieldId,
+    iconId
+) {
+
+    const field =
+        document.getElementById(fieldId);
+
+    const icon =
+        document.getElementById(iconId);
+
+
+    if (field.type === "password") {
+
+        field.type = "text";
+
+        icon.classList.remove("bi-eye");
+
+        icon.classList.add("bi-eye-slash");
+
+    } else {
+
+        field.type = "password";
+
+        icon.classList.remove("bi-eye-slash");
+
+        icon.classList.add("bi-eye");
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

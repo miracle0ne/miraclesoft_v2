@@ -1,0 +1,466 @@
+/* =========================================
+   MIRACLESOFT V2
+   REPORTS & STATISTICS
+========================================= */
+
+.reports-page {
+    width: 100%;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.reports-header h2 {
+    color: #333;
+    font-size: 1.7rem;
+}
+
+.reports-header h2 i {
+    color: #f58220;
+}
+
+.reports-dashboard-btn {
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   REPORT CARDS
+========================================= */
+
+.report-card {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+    padding: 20px;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
+}
+
+.report-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);
+}
+
+
+.report-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.report-label {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+
+.report-value {
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+
+.report-order-value {
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+
+/* =========================================
+   ICONS
+========================================= */
+
+.report-icon {
+    min-width: 55px;
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 1.35rem;
+}
+
+
+.today-icon {
+    color: #f58220;
+    background: rgba(245, 130, 32, 0.12);
+}
+
+.week-icon {
+    color: #0d6efd;
+    background: rgba(13, 110, 253, 0.10);
+}
+
+.month-icon {
+    color: #198754;
+    background: rgba(25, 135, 84, 0.10);
+}
+
+.year-icon {
+    color: #6f42c1;
+    background: rgba(111, 66, 193, 0.10);
+}
+
+.paid-icon {
+    color: #198754;
+    background: rgba(25, 135, 84, 0.10);
+}
+
+.unpaid-icon {
+    color: #6c757d;
+    background: rgba(108, 117, 125, 0.12);
+}
+
+
+/* =========================================
+   CHART CARD
+========================================= */
+
+.report-chart-card {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+
+.report-chart-header {
+    padding: 20px 22px;
+    border-bottom: 1px solid #eeeeee;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.report-chart-header h5 i {
+    color: #f58220;
+}
+.sales-chart {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   CHART
+========================================= */
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    padding: 20px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .reports-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .report-card {
+        padding: 18px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 575.98px) {
+
+    .reports-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .reports-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .reports-header h2 {
+        font-size: 1.35rem;
+    }
+
+
+    .reports-header p {
+        font-size: 0.85rem;
+    }
+
+
+    .reports-dashboard-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .report-card {
+        padding: 17px;
+        border-radius: 12px;
+    }
+
+
+    .report-value {
+        font-size: 1.1rem;
+    }
+
+
+    .report-order-value {
+        font-size: 1.6rem;
+    }
+
+
+    .report-icon {
+        min-width: 48px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.15rem;
+    }
+
+
+    .report-chart-header {
+        padding: 16px;
+    }
+
+
+    .chart-container {
+        height: 260px;
+        padding: 12px;
+    }
+
+}
+/* =========================================
+   MIRACLESOFT V2
+   ADMIN DASHBOARD
+========================================= */
+
+.admin-dashboard {
+    width: 100%;
+}
+
+
+/* HEADER */
+
+.dashboard-orange {
+    color: #f58220;
+}
+
+.dashboard-btn {
+    background: #f58220;
+    color: #ffffff;
+    border: 1px solid #f58220;
+    font-weight: 600;
+}
+
+.dashboard-btn:hover {
+    background: #d96d0b;
+    color: #ffffff;
+}
+
+
+/* CARDS */
+
+.dashboard-card,
+.status-card,
+.dashboard-table-card {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card {
+    height: 100%;
+    padding: 20px;
+    transition: 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);
+}
+
+
+.dashboard-card-body,
+.status-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.dashboard-label {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+
+.dashboard-value {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+
+.sales-value {
+    font-size: 1.25rem;
+}
+
+
+/* ICONS */
+
+.dashboard-icon,
+.status-icon {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    font-size: 1.3rem;
+}
+
+
+.products-icon {
+    color: #f58220;
+    background: rgba(245, 130, 32, 0.12);
+}
+
+.orders-icon {
+    color: #0d6efd;
+    background: rgba(13, 110, 253, 0.10);
+}
+
+.users-icon {
+    color: #6f42c1;
+    background: rgba(111, 66, 193, 0.10);
+}
+
+.sales-icon {
+    color: #198754;
+    background: rgba(25, 135, 84, 0.10);
+}
+
+
+/* STATUS */
+
+.status-card {
+    padding: 20px;
+    height: 100%;
+}
+
+.pending-icon {
+    color: #ffc107;
+    background: rgba(255, 193, 7, 0.12);
+}
+
+.delivered-icon {
+    color: #198754;
+    background: rgba(25, 135, 84, 0.10);
+}
+
+
+/* TABLE */
+
+.dashboard-table-card {
+    overflow: hidden;
+}
+
+.dashboard-table-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.dashboard-table-card .table thead th {
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.dashboard-table-card .table tbody td {
+    white-space: nowrap;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 575.98px) {
+
+    .admin-dashboard {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+    }
+
+    .dashboard-card,
+    .status-card {
+        padding: 17px;
+    }
+
+    .dashboard-icon,
+    .status-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        font-size: 1.1rem;
+    }
+
+    .sales-value {
+        font-size: 1.05rem;
+    }
+
+    .dashboard-table-header {
+        padding: 16px;
+        align-items: flex-start;
+    }
+
+}

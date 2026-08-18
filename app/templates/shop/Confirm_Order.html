@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+
+{% block title %}
+Order #{{ order.id }} - ElectroShop
+{% endblock %}
+
+
+{% block content %}
+
+<section class="confirmation-section py-5">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+
+                <!-- =================================
+                     SUCCESS MESSAGE
+                ================================== -->
+
+                <div class="confirmation-success">
+
+                    <div class="confirmation-icon">
+
+                        <i class="bi bi-check-lg"></i>
+
+                    </div>
+
+
+                    <span class="confirmation-label">
+
+                        ORDER RECEIVED
+
+                    </span>
+
+
+                    <h1 class="fw-bold mt-2">
+
+                        Order Placed Successfully!
+
+                    </h1>
+
+
+                    <p class="text-muted mb-3">
+
+                        Thank you for shopping with
+                        <strong>ElectroShop</strong>.
+
+                    </p>
+
+
+                    <div class="order-number">
+
+                        <span>
+                            Order Number
+                        </span>
+
+                        <strong>
+                            #{{ order.id }}
+                        </strong>
+
+                    </div>
+
+
+                    <p class="small text-muted mt-3 mb-0">
+
+                        Your order has been received and is
+                        being processed.
+
+                    </p>
+
+                </div>
+
+
+                <!-- =================================
+                     ORDER INFORMATION
+                ================================== -->
+
+                <div class="confirmation-card mt-4">
+
+                    <div class="confirmation-card-header">
+
+                        <h5 class="fw-bold mb-0">
+
+                            <i class="bi bi-receipt me-2"></i>
+
+                            Order Information
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="confirmation-card-body">
+
+                        <div class="row g-4">
+
+
+                            <!-- CUSTOMER -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info-item">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Customer
+                                        </small>
+
+                                        <strong>
+                                            {{ order.full_name }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PHONE -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info-item">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-telephone"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Phone
+                                        </small>
+
+                                        <strong>
+                                            {{ order.phone }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info-item">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-geo-alt"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Delivery Address
+                                        </small>
+
+                                        <strong>
+                                            {{ order.address }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- STATUS -->
+
+                            <div class="col-md-6">
+
+                                <div class="order-info-item">
+
+                                    <div class="order-info-icon">
+
+                                        <i class="bi bi-clock-history"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small>
+                                            Order Status
+                                        </small>
+
+                                        <span class="badge
+                                                     bg-warning
+                                                     text-dark
+                                                     text-capitalize">
+
+                                            {{ order.status }}
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <hr class="my-4">
+
+
+                        <!-- TOTAL -->
+
+                        <div class="confirmation-total">
+
+                            <span>
+
+                                Total Amount
+
+                            </span>
+
+                            <strong>
+
+                                TSh
+                                {{ "{:,.0f}".format(
+                                    order.total
+                                ) }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     NEXT STEPS
+                ================================== -->
+
+                <div class="order-next-step mt-4">
+
+                    <div class="d-flex align-items-start gap-3">
+
+                        <i class="bi bi-info-circle-fill"></i>
+
+                        <div>
+
+                            <h6 class="fw-bold mb-1">
+
+                                What's next?
+
+                            </h6>
+
+                            <p class="text-muted small mb-0">
+
+                                Our team will review your order
+                                and contact you using the phone
+                                number provided.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     ACTIONS
+                ================================== -->
+
+                <div class="row g-3 mt-3">
+
+                    <div class="col-md-6">
+
+                        <a
+                            href="{{ url_for('shop.product') }}"
+                            class="btn btn-outline-dark
+                                   btn-lg w-100"
+                        >
+
+                            <i class="bi bi-shop me-2"></i>
+
+                            Continue Shopping
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <a
+                            href="{{ url_for(
+                                'shop.order_details',
+                                order_id=order.id
+                            ) }}"
+                            class="btn btn-warning
+                                   btn-lg w-100
+                                   fw-bold"
+                        >
+
+                            <i class="bi bi-eye me-2"></i>
+
+                            Order Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

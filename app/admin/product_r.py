@@ -1,0 +1,159 @@
+from flask import (
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    current_app,request
+)
+
+from flask_login import login_required
+
+from werkzeug.utils import secure_filename
+
+import os
+
+from slugify import slugify
+
+from app.extension import db
+from app.models import Product
+
+from . import admin
+from . form import ProductForm,DeleteForm
+
+
+@admin.route(
+    "/products/edit/<int:product_id>",
+    methods=["GET", "POST"]
+)
+@login_required
+def edit_product(product_id):
+
+  product = Product.query.get_or_404(product_id)
+
+  form = ProductForm()
+  if request.method == "GET":
+    form.name.data = product.name
+    form.description.data = product.description
+    form.price.data = product.price
+    form.stock.data = product.stock
+    form.active.data = product.active
+
+
+  if form.validate_on_submit():
+
+    product.name = form.name.data
+    product.description = form.description.data
+    product.price = form.price.data
+    product.stock = form.stock.data
+    product.active = form.active.data
+
+    # Update image only if a new image is selected
+    if form.image.data:
+
+      filename = secure_filename(
+                form.image.data.filename
+            )
+
+      if filename:
+
+        upload_folder = current_app.config["UPLOAD_FOLDER"]
+
+        os.makedirs(
+            upload_folder,
+            exist_ok=True
+          )
+
+        form.image.data.save(
+           os.path.join(
+           upload_folder,filename
+            )
+        )
+
+        product.image = filename
+
+        # Update slug
+    base_slug = slugify(form.name.data)
+
+    slug = base_slug
+    count = 1
+
+    while Product.query.filter(Product.slug == slug,Product.id != product.id
+        ).first():
+
+      slug = f"{base_slug}-{count}"
+      count += 1
+
+    product.slug = slug
+
+    db.session.commit()
+
+    flash(
+      "Product updated successfully.","success"
+        )
+
+    return redirect(
+      url_for("admin.products")
+    )
+
+  return render_template("admin/products/edit.html",
+    form=form,
+    product=product
+  )
+
+
+@admin.route(
+    "/products/delete/<int:product_id>",
+    methods=["POST"]
+)
+@login_required
+def delete_product(product_id):
+
+  product = Product.query.get_or_404(product_id)
+
+  product.active=False
+
+  db.session.commit()
+
+  flash(
+    "Product deleted successfully.",
+    "success"
+    )
+
+  return redirect(
+    url_for("admin.products")
+  )
+@admin.route(
+    "/products/restore/<int:product_id>",
+    methods=["POST"]
+)
+@login_required
+def restore_product(product_id):
+
+    product = Product.query.get_or_404(product_id)
+
+    product.active = True
+
+    db.session.commit()
+
+    flash(
+        "Product restored successfully.",
+        "success"
+    )
+
+    return redirect(
+        url_for("admin.deleted_products")
+    )
+@admin.route("/products/deleted")
+@login_required
+def deleted_products():
+
+    products = Product.query.filter_by(
+        active=False
+    ).order_by(
+        Product.create_at.desc()
+    ).all()
+
+    return render_template(
+        "admin/products/deleted.html",
+        products=products
+    )

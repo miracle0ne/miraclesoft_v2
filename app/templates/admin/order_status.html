@@ -1,0 +1,17 @@
+<form method="POST"
+      action="{{ url_for(
+          'admin.update_order_status',
+          order_id=order.id
+      ) }}">
+
+    {{ form.hidden_tag() }}
+
+    {{ form.status(
+        class="form-select form-select-sm"
+    ) }}
+
+    {{ form.submit(
+        class="btn btn-primary btn-sm mt-2"
+    ) }}
+
+</form>

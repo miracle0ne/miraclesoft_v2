@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- PAGE HEADER -->
+    <div class="d-flex justify-content-between
+                align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold mb-1">
+
+                <i class="bi bi-trash3 me-2"></i>
+
+                Deleted Products
+
+            </h2>
+
+            <p class="text-muted mb-0">
+
+                Products moved to the recycle bin
+
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('admin.products') }}"
+           class="btn btn-outline-secondary">
+
+            <i class="bi bi-arrow-left me-1"></i>
+
+            Back to Products
+
+        </a>
+
+    </div>
+
+
+    <!-- PRODUCTS CARD -->
+    <div class="admin-products-card shadow-sm">
+
+        <!-- HEADER -->
+        <div class="admin-products-header">
+
+            <div class="d-flex justify-content-between
+                        align-items-center">
+
+                <div>
+
+                    <h5 class="mb-1 fw-bold">
+
+                        Recycle Bin
+
+                    </h5>
+
+                    <small class="opacity-75">
+
+                        Restore products when needed
+
+                    </small>
+
+                </div>
+
+
+                <span class="badge bg-warning text-dark">
+
+                    {{ products|length }} Deleted
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- TABLE -->
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th class="ps-4">
+                            #
+                        </th>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Stock
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th class="text-end pe-4">
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for product in products %}
+
+                    <tr class="admin-product-row">
+
+                        <!-- NUMBER -->
+                        <td class="ps-4 text-muted">
+
+                            {{ loop.index }}
+
+                        </td>
+
+
+                        <!-- PRODUCT -->
+                        <td>
+
+                            <div class="d-flex
+                                        align-items-center">
+
+                                <img
+                                    src="{{ url_for(
+                                        'static',
+                                        filename='uploads/products/' ~
+                                        (product.image or 'default.png')
+                                    ) }}"
+                                    class="admin-product-image me-3"
+                                    alt="{{ product.name }}"
+                                >
+
+
+                                <div>
+
+                                    <div class="admin-product-name">
+
+                                        {{ product.name }}
+
+                                    </div>
+
+                                    <small class="text-muted">
+
+                                        #{{ product.id }}
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- PRICE -->
+                        <td>
+
+                            <span class="admin-product-price">
+
+                                TSh
+                                {{ "{:,.0f}".format(
+                                    product.price
+                                ) }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- STOCK -->
+                        <td>
+
+                            {{ product.stock }}
+
+                        </td>
+
+
+                        <!-- STATUS -->
+                        <td>
+
+                            <span class="badge bg-danger">
+
+                                <i class="bi bi-trash3 me-1"></i>
+
+                                Deleted
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- ACTION -->
+                        <td class="text-end pe-4">
+
+                            <form method="POST"
+                                  action="{{ url_for(
+                                      'admin.restore_product',
+                                      product_id=product.id
+                                  ) }}"
+                                  class="d-inline">
+
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    value="{{ csrf_token() }}"
+                                >
+
+
+                                <button type="submit"
+                                        class="btn btn-outline-success
+                                               btn-sm admin-action-btn"
+                                        title="Restore Product">
+
+                                    <i class="bi bi-arrow-counterclockwise"></i>
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            <div class="admin-products-empty">
+
+                                <i class="bi bi-trash3 fs-1
+                                          d-block mb-3"></i>
+
+                                <h5 class="fw-bold">
+
+                                    Recycle Bin is Empty
+
+                                </h5>
+
+                                <p class="mb-0">
+
+                                    There are no deleted products.
+
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

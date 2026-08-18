@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login - ElectroShop
+{% endblock %}
+
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+
+
+                <!-- LOGIN CARD -->
+
+                <div class="auth-card">
+
+
+                    <!-- HEADER -->
+
+                    <div class="auth-header text-center">
+
+                        <div class="auth-icon">
+
+                            <i class="bi bi-person-fill"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold mt-3 mb-1">
+
+                            Welcome Back
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Login to your ElectroShop account
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- FORM -->
+
+                    <form method="POST"
+                          class="mt-4">
+
+                        {{ form.hidden_tag() }}
+
+
+                        <!-- EMAIL -->
+
+                        <div class="mb-3">
+
+                            {{ form.email.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            {{ form.email(
+                                class="form-control form-control-lg",
+                                placeholder="Enter your email",
+                                autocomplete="email"
+                            ) }}
+
+                            {% for error in form.email.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                <i class="bi bi-exclamation-circle me-1"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="mb-3">
+
+                            {{ form.password.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            <div class="input-group">
+
+                                {{ form.password(
+                                    class="form-control form-control-lg",
+                                    placeholder="Enter your password",
+                                    autocomplete="current-password"
+                                ) }}
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    onclick="togglePassword()">
+
+                                    <i
+                                        class="bi bi-eye"
+                                        id="passwordIcon">
+                                    </i>
+
+                                </button>
+
+                            </div>
+
+
+                            {% for error in form.password.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                <i class="bi bi-exclamation-circle me-1"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- SUBMIT -->
+
+                        {{ form.submit(
+                            class="btn btn-warning
+                                   btn-lg w-100
+                                   fw-bold auth-submit"
+                        ) }}
+
+
+                    </form>
+
+
+                    <!-- REGISTER -->
+
+                    <div class="text-center mt-4">
+
+                        <span class="text-muted">
+
+                            Don't have an account?
+
+                        </span>
+
+                        <a
+                            href="{{ url_for('auth.register') }}"
+                            class="fw-semibold text-decoration-none">
+
+                            Create Account
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- TRUST -->
+
+                    <div class="auth-trust mt-4">
+
+                        <div>
+
+                            <i class="bi bi-shield-check"></i>
+
+                            Secure Login
+
+                        </div>
+
+                        <div>
+
+                            <i class="bi bi-lock"></i>
+
+                            Your data is protected
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const icon =
+        document.getElementById("passwordIcon");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        icon.classList.remove("bi-eye");
+
+        icon.classList.add("bi-eye-slash");
+
+    } else {
+
+        password.type = "password";
+
+        icon.classList.remove("bi-eye-slash");
+
+        icon.classList.add("bi-eye");
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

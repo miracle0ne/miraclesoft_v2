@@ -1,0 +1,643 @@
+{% extends "base.html" %}
+
+{% block title %}
+ElectroShop | Electronics & Accessories
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero-section">
+
+    <div class="container py-5">
+
+        <div class="row align-items-center
+                    min-vh-50 g-4">
+
+
+            <!-- HERO TEXT -->
+
+            <div class="col-lg-6">
+
+                <span class="badge bg-warning text-dark
+                             px-3 py-2 mb-3">
+
+                    <i class="bi bi-lightning-fill me-1"></i>
+
+                    Smart Technology
+
+                </span>
+
+
+                <h1 class="display-4 fw-bold mb-3">
+
+                    Everything Electronics.
+
+                    <span class="text-warning">
+                        One Shop.
+                    </span>
+
+                </h1>
+
+
+                <p class="lead text-white-50 mb-4">
+
+                    Discover quality electronics,
+                    accessories and technology products
+                    at affordable prices.
+
+                </p>
+
+
+                <div class="d-flex gap-2 flex-wrap">
+
+                    <a href="#products"
+                       class="btn btn-warning btn-lg px-4 fw-semibold">
+
+                        <i class="bi bi-shop me-2"></i>
+
+                        Shop Now
+
+                    </a>
+
+
+                    <a href="#categories"
+                       class="btn btn-outline-light btn-lg px-4">
+
+                        Explore Categories
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO VISUAL -->
+
+            <div class="col-lg-6 text-center">
+
+                <i class="bi bi-cpu-fill hero-icon"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     CATEGORIES
+================================================== -->
+
+<section class="py-5"
+         id="categories">
+
+    <div class="container">
+
+
+        <div class="mb-4">
+
+            <h2 class="section-title fw-bold">
+
+                Shop by Category
+
+            </h2>
+
+            <p class="text-muted mb-0">
+
+                Find the technology you need.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-3">
+
+
+            <!-- PHONES -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <a href="#"
+                   class="text-decoration-none">
+
+                    <div class="card category-card
+                                border-0 shadow-sm
+                                text-center h-100">
+
+                        <div class="card-body py-4">
+
+                            <i class="bi bi-phone
+                                      fs-1 text-warning">
+                            </i>
+
+                            <h6 class="fw-bold mt-3 mb-0">
+
+                                Phones
+
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- COMPUTERS -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <a href="#"
+                   class="text-decoration-none">
+
+                    <div class="card category-card
+                                border-0 shadow-sm
+                                text-center h-100">
+
+                        <div class="card-body py-4">
+
+                            <i class="bi bi-laptop
+                                      fs-1 text-warning">
+                            </i>
+
+                            <h6 class="fw-bold mt-3 mb-0">
+
+                                Computers
+
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- AUDIO -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <a href="#"
+                   class="text-decoration-none">
+
+                    <div class="card category-card
+                                border-0 shadow-sm
+                                text-center h-100">
+
+                        <div class="card-body py-4">
+
+                            <i class="bi bi-headphones
+                                      fs-1 text-warning">
+                            </i>
+
+                            <h6 class="fw-bold mt-3 mb-0">
+
+                                Audio
+
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- ACCESSORIES -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <a href="#"
+                   class="text-decoration-none">
+
+                    <div class="card category-card
+                                border-0 shadow-sm
+                                text-center h-100">
+
+                        <div class="card-body py-4">
+
+                            <i class="bi bi-usb-symbol
+                                      fs-1 text-warning">
+                            </i>
+
+                            <h6 class="fw-bold mt-3 mb-0">
+
+                                Accessories
+
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- MOTORS -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <a href="#"
+                   class="text-decoration-none">
+
+                    <div class="card category-card
+                                border-0 shadow-sm
+                                text-center h-100">
+
+                        <div class="card-body py-4">
+
+                            <i class="bi bi-gear-wide-connected
+                                      fs-1 text-warning">
+                            </i>
+
+                            <h6 class="fw-bold mt-3 mb-0">
+
+                                Motors
+
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- DEALS -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <a href="#"
+                   class="text-decoration-none">
+
+                    <div class="card category-card
+                                border-0 shadow-sm
+                                text-center h-100">
+
+                        <div class="card-body py-4">
+
+                            <i class="bi bi-lightning-charge
+                                      fs-1 text-danger">
+                            </i>
+
+                            <h6 class="fw-bold mt-3 mb-0">
+
+                                Deals
+
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     PRODUCTS
+================================================== -->
+
+<section class="py-5"
+         id="products">
+
+    <div class="container">
+
+
+        <div class="d-flex justify-content-between
+                    align-items-end mb-4">
+
+            <div>
+
+                <h2 class="section-title fw-bold">
+
+                    Popular Products
+
+                </h2>
+
+                <p class="text-muted mb-0">
+
+                    Discover our latest electronics
+                    and accessories.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if products %}
+
+
+        <div class="row g-4">
+
+
+            {% for product in products %}
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+
+                <div class="card product-card
+                            h-100 shadow-sm">
+
+
+                    <!-- PRODUCT IMAGE -->
+
+                    <div class="product-image-wrapper">
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename=
+                                'uploads/products/' ~
+                                (product.image or 'default.png')
+                            ) }}"
+                            class="product-image"
+                            alt="{{ product.name }}">
+
+
+                        {% if product.stock > 0 %}
+
+                        <span class="badge bg-success
+                                     product-badge">
+
+                            In Stock
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-danger
+                                     product-badge">
+
+                            Out of Stock
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- PRODUCT BODY -->
+
+                    <div class="card-body d-flex flex-column">
+
+
+                        <h6 class="product-name">
+
+                            {{ product.name }}
+
+                        </h6>
+
+
+                        <!-- RATING VISUAL -->
+
+                        <div class="rating mb-2">
+
+                            <span class="text-warning">
+
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+
+                            </span>
+
+                            <small class="text-muted">
+                                New
+                            </small>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <p class="product-description
+                                  flex-grow-1">
+
+                            {{ product.description[:80] }}
+
+                            {% if product.description|length > 80 %}
+                                ...
+                            {% endif %}
+
+                        </p>
+
+
+                        <!-- PRICE -->
+
+                        <div class="product-price mb-2">
+
+                            TSh
+                            {{ "{:,.0f}".format(
+                                product.price
+                            ) }}
+
+                        </div>
+
+
+                        <!-- STOCK -->
+
+                        {% if product.stock > 0 %}
+
+                        <small class="text-muted mb-3">
+
+                            <i class="bi bi-box-seam me-1"></i>
+
+                            {{ product.stock }}
+                            available
+
+                        </small>
+
+                        {% else %}
+
+                        <small class="text-danger mb-3">
+
+                            Currently unavailable
+
+                        </small>
+
+                        {% endif %}
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="d-grid gap-2">
+
+
+                            <a
+                                href="{{ url_for(
+                                    'shop.product_detail',
+                                    slug=product.slug
+                                ) }}"
+                                class="btn btn-outline-dark btn-sm">
+
+                                <i class="bi bi-eye me-1"></i>
+
+                                View Details
+
+                            </a>
+
+
+                            {% if product.stock > 0 %}
+
+                            <a
+                                href="{{ url_for(
+                                    'cart.add_to_cart',
+                                    product_id=product.id
+                                ) }}"
+                                class="btn btn-warning btn-sm">
+
+                                <i class="bi bi-cart-plus me-1"></i>
+
+                                Add to Cart
+
+                            </a>
+
+                            {% endif %}
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- NO PRODUCTS -->
+
+        <div class="text-center py-5">
+
+            <i class="bi bi-box-seam
+                      display-1 text-muted">
+            </i>
+
+            <h3 class="fw-bold mt-3">
+
+                No Products Available
+
+            </h3>
+
+            <p class="text-muted">
+
+                Products will appear here once
+                they are added by the administrator.
+
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     PROMOTION
+================================================== -->
+
+<section class="pb-5">
+
+    <div class="container">
+
+        <div class="promo-card
+                    text-white p-4 p-lg-5">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <span class="badge bg-warning text-dark mb-2">
+
+                        SPECIAL DEALS
+
+                    </span>
+
+                    <h2 class="fw-bold">
+
+                        Upgrade Your Technology
+
+                    </h2>
+
+                    <p class="text-white-50 mb-lg-0">
+
+                        Quality electronics and accessories
+                        for your everyday needs.
+
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+
+                    <a href="#products"
+                       class="btn btn-warning px-4">
+
+                        Shop Products
+
+                        <i class="bi bi-arrow-right ms-2"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
