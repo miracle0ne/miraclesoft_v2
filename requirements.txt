@@ -4,6 +4,7 @@ Flask-Migrate
 Flask-Login
 Flask-WTF
 resend
+slugify
 python-dotenv
 PyMySQL
 Werkzeug
