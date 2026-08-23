@@ -6,4 +6,4 @@ Flask-WTF
 python-dotenv
 PyMySQL
 Werkzeug
-matplotlib
+matplotlibgunicorn
