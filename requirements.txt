@@ -7,3 +7,4 @@ python-dotenv
 PyMySQL
 Werkzeug
 matplotlibgunicorn
+psycopg2-binary
