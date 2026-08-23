@@ -23,3 +23,5 @@ class Config:
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    RESEND_API = os.getenv("RESEND_API")
+    

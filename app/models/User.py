@@ -11,6 +11,22 @@ class User(db.Model, UserMixin):
   db.ForeignKey("role.id")
   )
   active =db.Column(db.Boolean,default=True)
+  email_verified = db.Column(
+    db.Boolean,
+    default=False,
+    nullable=False
+  )
+
+  email_verification_token = db.Column(
+    db.String(255),
+    nullable=True,
+    unique=True
+  )
+  password_reset_token = db.Column(
+    db.String(255),
+    nullable=True,
+    unique=True
+)
   create_at =db.Column(db.DateTime,default=datetime.utcnow)
   role =db.relationship("Role",
   back_populates="user")

@@ -8,14 +8,95 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="ElectroShop - Electronics, accessories and technology products.">
-
+    <!-- SEO TITLE -->
     <title>
         {% block title %}
-        ElectroShop
+            MiracleSoft Technologies | Electronics & Accessories in Tanzania
         {% endblock %}
     </title>
+
+
+    <!-- SEO DESCRIPTION -->
+    <meta name="description"
+          content="{% block meta_description %}
+              Shop electronics, electrical products,
+              accessories and technology products in Tanzania
+              with MiracleSoft Technologies.
+          {% endblock %}">
+
+
+    <!-- SEARCH ENGINE INSTRUCTIONS -->
+    <meta name="robots"
+          content="{% block robots %}
+              index, follow
+          {% endblock %}">
+
+
+    <!-- AUTHOR -->
+    <meta name="author"
+          content="MiracleSoft Technologies">
+
+
+    <!-- CANONICAL URL -->
+    <link rel="canonical"
+          href="{{ request.base_url }}">
+
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title"
+          content="{% block og_title %}
+              MiracleSoft Technologies | Electronics & Accessories
+          {% endblock %}">
+
+    <meta property="og:description"
+          content="{% block og_description %}
+              Shop electronics, accessories and technology products
+              from MiracleSoft Technologies.
+          {% endblock %}">
+
+     <meta property="og:url"
+          content="{{ request.base_url }}">
+   <meta property="og:url"
+      content="{{ request.base_url }}">
+  <!-- TWITTER / X CARD -->
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="{% block twitter_title %}
+          MiracleSoft Technologies | Electronics & Accessories
+      {% endblock %}">
+
+<meta name="twitter:description"
+      content="{% block twitter_description %}
+          Shop electronics, accessories and technology products
+          from MiracleSoft Technologies.
+      {% endblock %}">
+
+<meta name="twitter:image"
+      content="{% block twitter_image %}
+          {{ url_for(
+              'static',
+              filename='images/default.png',
+              _external=True
+          ) }}
+      {% endblock %}">
+
+<!-- OPEN GRAPH IMAGE -->
+<meta property="og:image"
+      content="{% block og_image %}
+          {{ url_for(
+              'static',
+              filename='images/default.png',
+              _external=True
+          ) }}
+      {% endblock %}">
+
+
+
+    <meta property="og:type"
+          content="{% block og_type %}website{% endblock %}">
 
 
     <!-- Bootstrap 5 -->
@@ -32,7 +113,7 @@
         rel="stylesheet">
 
 
-    <!-- ElectroShop Custom CSS -->
+    <!-- MiracleSoft Custom CSS -->
 
     <link
         rel="stylesheet"
@@ -40,14 +121,26 @@
             'static',
             filename='css/styles.css'
         ) }}">
-    <link rel="stylesheet"
-      href="{{ url_for('static', filename='css/reports.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/orders_detail.css'
+        ) }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/reports.css'
+        ) }}">
+
 
     {% block extra_css %}
     {% endblock %}
 
 </head>
-
 
 <body class="d-flex flex-column min-vh-100">
 

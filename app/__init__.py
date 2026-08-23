@@ -14,7 +14,7 @@ def load_user(user_id):
 def create_app():
   app=Flask(__name__)
   app.config.from_object(Config)
-  print("secret",app.config.get("SECRET_KEY"))
+  
   db.init_app(app)
   migrate.init_app(app,
   db)

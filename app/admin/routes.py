@@ -169,7 +169,7 @@ def order_details(order_id):
 
 
   return render_template(
-        "admin/orders_detail.html",
+        "admin/order_details.html",
         order=order,
         form=form,
         payment_form=payment_form

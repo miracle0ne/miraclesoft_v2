@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-Order #{{ order.id }} | Admin
+Order #{{ order.id }}
 {% endblock %}
 
 {% block content %}
 
-<div class="admin-order-details py-4">
+<div class="admin-order-details">
 
     <!-- HEADER -->
-    <div class="order-details-header mb-4">
+    <div class="order-details-header">
 
         <div class="order-heading">
 
@@ -18,7 +18,6 @@ Order #{{ order.id }} | Admin
             </div>
 
             <div>
-
                 <h2>
                     Order #{{ order.id }}
                 </h2>
@@ -26,7 +25,6 @@ Order #{{ order.id }} | Admin
                 <p>
                     Order details and customer information
                 </p>
-
             </div>
 
         </div>
@@ -46,9 +44,9 @@ Order #{{ order.id }} | Admin
 
     <div class="row g-4">
 
-        <!-- ================================= -->
-        <!-- LEFT COLUMN -->
-        <!-- ================================= -->
+        <!-- =====================================
+             LEFT COLUMN
+        ====================================== -->
 
         <div class="col-lg-8">
 
@@ -65,7 +63,6 @@ Order #{{ order.id }} | Admin
                         </div>
 
                         <div>
-
                             <h5>
                                 Ordered Products
                             </h5>
@@ -73,7 +70,6 @@ Order #{{ order.id }} | Admin
                             <span>
                                 Items included in this order
                             </span>
-
                         </div>
 
                     </div>
@@ -117,12 +113,11 @@ Order #{{ order.id }} | Admin
                             <tr>
 
                                 <!-- PRODUCT -->
-
                                 <td>
 
                                     <div class="product-detail-info">
 
-                                        {% if item.product and item.product.image %}
+                                        {% if item.product.image %}
 
                                         <img
                                             src="{{ url_for(
@@ -136,17 +131,13 @@ Order #{{ order.id }} | Admin
                                         {% else %}
 
                                         <div class="order-product-placeholder">
-
                                             <i class="bi bi-image"></i>
-
                                         </div>
 
                                         {% endif %}
 
 
                                         <div>
-
-                                            {% if item.product %}
 
                                             <strong>
                                                 {{ item.product.name }}
@@ -157,14 +148,6 @@ Order #{{ order.id }} | Admin
                                                 {{ item.product.id }}
                                             </small>
 
-                                            {% else %}
-
-                                            <strong>
-                                                Product unavailable
-                                            </strong>
-
-                                            {% endif %}
-
                                         </div>
 
                                     </div>
@@ -173,7 +156,6 @@ Order #{{ order.id }} | Admin
 
 
                                 <!-- QUANTITY -->
-
                                 <td class="text-center">
 
                                     <span class="quantity-badge">
@@ -184,7 +166,6 @@ Order #{{ order.id }} | Admin
 
 
                                 <!-- PRICE -->
-
                                 <td class="text-end">
 
                                     <div class="item-price">
@@ -194,13 +175,12 @@ Order #{{ order.id }} | Admin
                                             item.price
                                         ) }}
 
-                                    </div>
+                                  </div>
 
                                 </td>
 
 
                                 <!-- SUBTOTAL -->
-
                                 <td class="text-end">
 
                                     <div class="item-subtotal">
@@ -287,9 +267,106 @@ Order #{{ order.id }} | Admin
             </div>
 
 
-            <!-- ORDER INFORMATION -->
+            <!-- MOBILE PRODUCTS -->
+            <div class="mobile-product-list">
 
-            <div class="details-card order-info-card mt-4">
+                {% for item in order.items %}
+
+                <div class="mobile-product-card">
+
+                    <div class="mobile-product-top">
+
+                        {% if item.product.image %}
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename='uploads/' ~ item.product.image
+                            ) }}"
+                            alt="{{ item.product.name }}"
+                        >
+
+                        {% else %}
+
+                        <div class="mobile-product-placeholder">
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        {% endif %}
+
+
+                        <div class="mobile-product-name">
+
+                            <strong>
+                                {{ item.product.name }}
+                            </strong>
+
+                            <small>
+                                Product ID:
+                                {{ item.product.id }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mobile-product-info">
+
+                        <div>
+                            <small>Quantity</small>
+                            <strong>
+                                {{ item.quantity }}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Price</small>
+                            <strong>
+                                TZS
+                                {{ "{:,.2f}".format(
+                                    item.price
+                                ) }}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Subtotal</small>
+                            <strong class="orange-text">
+                                TZS
+                                {{ "{:,.2f}".format(
+                                    item.price * item.quantity
+                                ) }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+                <div class="mobile-total">
+
+                    <span>
+                        Order Total
+                    </span>
+
+                    <strong>
+                        TZS
+                        {{ "{:,.2f}".format(
+                            order.total
+                        ) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ORDER INFORMATION -->
+            <div class="details-card order-info-card">
 
                 <div class="details-card-header">
 
@@ -300,7 +377,6 @@ Order #{{ order.id }} | Admin
                         </div>
 
                         <div>
-
                             <h5>
                                 Order Information
                             </h5>
@@ -308,7 +384,6 @@ Order #{{ order.id }} | Admin
                             <span>
                                 Basic order information
                             </span>
-
                         </div>
 
                     </div>
@@ -321,11 +396,8 @@ Order #{{ order.id }} | Admin
                     <div class="info-box">
 
                         <span>
-
                             <i class="bi bi-hash"></i>
-
                             Order Number
-
                         </span>
 
                         <strong>
@@ -338,11 +410,8 @@ Order #{{ order.id }} | Admin
                     <div class="info-box">
 
                         <span>
-
                             <i class="bi bi-calendar3"></i>
-
                             Order Date
-
                         </span>
 
                         <strong>
@@ -362,15 +431,14 @@ Order #{{ order.id }} | Admin
         </div>
 
 
-        <!-- ================================= -->
-        <!-- RIGHT COLUMN -->
-        <!-- ================================= -->
+        <!-- =====================================
+             RIGHT COLUMN
+        ====================================== -->
 
         <div class="col-lg-4">
 
 
             <!-- CUSTOMER -->
-
             <div class="details-card customer-card">
 
                 <div class="details-card-header">
@@ -378,13 +446,10 @@ Order #{{ order.id }} | Admin
                     <div class="card-header-title">
 
                         <div class="header-icon orange">
-
                             <i class="bi bi-person-fill"></i>
-
                         </div>
 
                         <div>
-
                             <h5>
                                 Customer
                             </h5>
@@ -392,7 +457,6 @@ Order #{{ order.id }} | Admin
                             <span>
                                 Customer information
                             </span>
-
                         </div>
 
                     </div>
@@ -428,9 +492,7 @@ Order #{{ order.id }} | Admin
                     <div class="customer-info-row">
 
                         <div class="customer-info-icon">
-
                             <i class="bi bi-telephone-fill"></i>
-
                         </div>
 
                         <div>
@@ -451,9 +513,7 @@ Order #{{ order.id }} | Admin
                     <div class="customer-info-row">
 
                         <div class="customer-info-icon">
-
                             <i class="bi bi-geo-alt-fill"></i>
-
                         </div>
 
                         <div>
@@ -476,21 +536,17 @@ Order #{{ order.id }} | Admin
 
 
             <!-- ORDER STATUS -->
-
-            <div class="details-card status-card mt-4">
+            <div class="details-card status-card">
 
                 <div class="details-card-header">
 
                     <div class="card-header-title">
 
                         <div class="header-icon orange">
-
                             <i class="bi bi-truck"></i>
-
                         </div>
 
                         <div>
-
                             <h5>
                                 Order Status
                             </h5>
@@ -498,7 +554,6 @@ Order #{{ order.id }} | Admin
                             <span>
                                 Manage order progress
                             </span>
-
                         </div>
 
                     </div>
@@ -507,6 +562,7 @@ Order #{{ order.id }} | Admin
 
 
                 <div class="status-body">
+
 
                     <!-- CURRENT STATUS -->
 
@@ -535,12 +591,12 @@ Order #{{ order.id }} | Admin
                                     Processing
                                 </strong>
 
-                            {% elif order.status in ["shipping", "shipped"] %}
+                            {% elif order.status == "shipped" %}
 
                                 <span class="status-dot shipped"></span>
 
                                 <strong>
-                                    Shipping
+                                    Shipped
                                 </strong>
 
                             {% elif order.status == "delivered" %}
@@ -551,7 +607,7 @@ Order #{{ order.id }} | Admin
                                     Delivered
                                 </strong>
 
-                            {% elif order.status in ["canceled", "cancelled"] %}
+                            {% elif order.status == "cancelled" %}
 
                                 <span class="status-dot cancelled"></span>
 
@@ -572,9 +628,9 @@ Order #{{ order.id }} | Admin
                         </div>
 
                     </div>
+                </div>
 
-
-                    <!-- UPDATE STATUS -->
+                    
 
                     <form method="POST"
                           action="{{ url_for(
@@ -605,151 +661,11 @@ Order #{{ order.id }} | Admin
                                 </div>
 
                             {% endfor %}
-
-                        </div>
-
-
-                        {{ form.submit(
-                            class="btn btn-warning w-100 mt-3"
-                        ) }}
-
                     </form>
-
-                </div>
-
-            </div>
-
-
-            <!-- PAYMENT -->
-
-            <div class="details-card payment-card mt-4">
-
-                <div class="details-card-header">
-
-                    <div class="card-header-title">
-
-                        <div class="header-icon green">
-
-                            <i class="bi bi-credit-card-fill"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h5>
-                                Payment
-                            </h5>
-
-                            <span>
-                                Payment information
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="payment-body">
-
-                    <div class="current-status-box">
-
-                        <small>
-                            CURRENT PAYMENT STATUS
-                        </small>
-
-
-                        <div class="status-display">
-
-                            {% if order.payment_status == "paid" %}
-
-                                <span class="status-dot paid"></span>
-
-                                <strong>
-                                    Paid
-                                </strong>
-
-                            {% elif order.payment_status == "pending" %}
-
-                                <span class="status-dot pending"></span>
-
-                                <strong>
-                                    Pending
-                                </strong>
-
-                            {% elif order.payment_status == "failed" %}
-
-                                <span class="status-dot cancelled"></span>
-
-                                <strong>
-                                    Failed
-                                </strong>
-
-                            {% else %}
-
-                                <span class="status-dot other"></span>
-
-                                <strong>
-                                    Unpaid
-                                </strong>
-
-                            {% endif %}
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- UPDATE PAYMENT -->
-
-                    <form method="POST"
-                          action="{{ url_for(
-                              'admin.update_payment_status',
-                              order_id=order.id
-                          ) }}">
-
-                        {{ payment_form.hidden_tag() }}
-
-
-                        <div class="status-form-group">
-
-                            {{ payment_form.payment_status.label(
-                                class="status-label"
-                            ) }}
-
-                            {{ payment_form.payment_status(
-                                class="form-select status-select"
-                            ) }}
-
-
-                            {% for error in payment_form.payment_status.errors %}
-
-                                <div class="status-error">
-
-                                    {{ error }}
-
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        {{ payment_form.submit(
-                            class="btn btn-success w-100 mt-3"
-                        ) }}
-
-                    </form>
-
-                </div>
-
-            </div>
 
 
             <!-- TOTAL -->
-
-            <div class="total-summary-card mt-4">
+            <div class="total-summary-card">
 
                 <div class="total-summary-icon">
 
@@ -778,7 +694,7 @@ Order #{{ order.id }} | Admin
             </div>
 
 
-            <!-- MOBILE BACK -->
+            <!-- BACK BUTTON -->
 
             <a href="{{ url_for('admin.orders') }}"
                class="mobile-back-orders">

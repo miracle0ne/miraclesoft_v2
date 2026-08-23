@@ -1,10 +1,5 @@
 {% extends "base.html" %}
-
-{% block title %}
-ElectroShop | Electronics & Accessories
-{% endblock %}
-
-
+{% block title %}Home | ElectroShop Tanzania{% endblock %}
 {% block content %}
 
 
@@ -91,7 +86,141 @@ ElectroShop | Electronics & Accessories
     </div>
 
 </section>
+<section class="featured-slider-section py-5">
 
+    <div class="container">
+
+        <!-- SECTION HEADER -->
+
+        <div class="text-center mb-4">
+
+            <span class="badge bg-warning text-dark px-3 py-2 mb-2">
+                <i class="bi bi-stars me-1"></i>
+                Featured Products
+            </span>
+
+            <h2 class="fw-bold">
+                Explore Our Products
+            </h2>
+
+            <p class="text-muted mb-0">
+                Discover quality electronics and accessories.
+            </p>
+
+        </div>
+
+
+        <!-- PRODUCT SLIDER -->
+
+        <div id="productHeroCarousel"
+             class="carousel slide"
+             data-bs-ride="carousel"
+             data-bs-interval="5000">
+
+            <div class="carousel-inner">
+
+                {% for product in products[:3] %}
+
+                <div class="carousel-item
+                    {% if loop.first %}active{% endif %}">
+
+                    <div class="row align-items-center g-4">
+
+                        <!-- PRODUCT IMAGE -->
+
+                        <div class="col-lg-7">
+
+                            <div class="featured-product-image">
+
+                                <img
+                                    src="{{ url_for(
+                                        'static',
+                                        filename='uploads/products/' + product.image
+                                    ) }}"
+                                    alt="{{ product.name }}">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PRODUCT INFO -->
+
+                        <div class="col-lg-5">
+
+                            <span class="text-warning fw-semibold">
+                                Featured Product
+                            </span>
+
+                            <h2 class="fw-bold mt-2">
+                                {{ product.name }}
+                            </h2>
+
+                            <p class="text-muted">
+
+                                {{ product.description[:180]
+                                   if product.description
+                                   else
+                                   'Quality electronics and accessories
+                                    at affordable prices.' }}
+
+                            </p>
+
+                            <h3 class="fw-bold text-warning mb-4">
+
+                                TSh {{ "{:,.0f}".format(product.price) }}
+
+                            </h3>
+
+                            <a
+                                href="{{ url_for(
+                                    'shop.product_detail',
+                                    slug=product.slug
+                                ) }}"
+                                class="btn btn-dark px-4">
+
+                                <i class="bi bi-eye me-2"></i>
+                                View Product
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PROGRESS BARS -->
+
+            <div class="featured-progress">
+
+                {% for product in products[:3] %}
+
+                <button
+                    type="button"
+                    data-bs-target="#productHeroCarousel"
+                    data-bs-slide-to="{{ loop.index0 }}"
+                    class="featured-progress-item
+                    {% if loop.first %}active{% endif %}">
+
+                    <span></span>
+
+                </button>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- ==================================================
@@ -640,4 +769,38 @@ ElectroShop | Electronics & Accessories
 </section>
 
 
+
+{% block extra_js %}
+
+<!-- PRODUCT SEO SCHEMA -->
+<script>
+function decreaseQuantity() {
+
+    const input = document.getElementById("quantity");
+
+    let value = parseInt(input.value) || 1;
+
+    if (value > 1) {
+        input.value = value - 1;
+    }
+
+}
+
+
+function increaseQuantity() {
+
+    const input = document.getElementById("quantity");
+
+    const max = parseInt(input.max);
+
+    let value = parseInt(input.value) || 1;
+
+    if (value < max) {
+        input.value = value + 1;
+    }
+
+}
+
+</script>
+{% endblock %}
 {% endblock %}

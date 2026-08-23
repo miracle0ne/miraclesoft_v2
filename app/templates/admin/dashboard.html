@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+{% endblock %}
+
 
 {% block title %}
 Admin Dashboard
@@ -22,7 +26,13 @@ Admin Dashboard
                 Welcome to MiracleSoft v2 administration panel.
             </p>
         </div>
+.        <a href="{{ url_for('admin.products') }}"
+           class="btn btn-warning fw-semibold">
 
+            <i class="bi bi-plus-circle me-1"></i>
+            manage product
+
+        </a>
         <a href="{{ url_for('admin.reports') }}"
            class="btn dashboard-btn mt-3 mt-md-0">
             <i class="bi bi-bar-chart-line me-1"></i>
@@ -37,10 +47,12 @@ Admin Dashboard
 
         <!-- PRODUCTS -->
         <div class="col-12 col-sm-6 col-xl-3">
+          
 
             <div class="dashboard-card">
 
                 <div class="dashboard-card-body">
+                
 
                     <div>
                         <p class="dashboard-label">

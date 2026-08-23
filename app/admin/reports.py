@@ -61,13 +61,11 @@ def create_weekly_sales_chart():
 
     # Create chart
 
-    plt.figure(figsize=(10, 4.5))
+    plt.figure(figsize=(10, 5))
 
-    plt.plot(
+    plt.bar(
         labels,
-        sales,
-        marker="o",
-        linewidth=2
+        sales
     )
 
     plt.title(
@@ -83,11 +81,13 @@ def create_weekly_sales_chart():
     )
 
     plt.grid(
-        True,
+        axis="y",
         alpha=0.25
     )
 
-    plt.tight_layout()
+    plt.tight_layout(
+        pad=2.0
+    )
 
 
     # Save chart
@@ -109,7 +109,8 @@ def create_weekly_sales_chart():
 
     plt.savefig(
         chart_path,
-        dpi=120
+        dpi=120,
+        bbox_inches="tight"
     )
 
     plt.close()
