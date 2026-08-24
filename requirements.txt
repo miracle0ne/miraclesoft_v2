@@ -9,3 +9,4 @@ Werkzeug
 matplotlib
 psycopg2-binary
 gunicorn
+resend
