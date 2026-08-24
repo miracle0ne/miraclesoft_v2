@@ -3,11 +3,9 @@ Flask-SQLAlchemy
 Flask-Migrate
 Flask-Login
 Flask-WTF
-resend
-slugify
 python-dotenv
 PyMySQL
 Werkzeug
 matplotlib
-gunicorn
 psycopg2-binary
+gunicorn
