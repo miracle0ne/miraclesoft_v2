@@ -8,7 +8,7 @@ from .form import CheckoutF
 @shop.route("/")
 def home():
   products= (Product.query.filter_by(active=True).order_by(Product.create_at.desc()).limit(8).all())
-  return render_template("shop/Index.html",products=products)
+  return render_template("shop/index.html",products=products)
 
 @shop.route("/product/<slug>")
 def product_detail(slug):
