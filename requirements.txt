@@ -10,3 +10,4 @@ matplotlib
 psycopg2-binary
 gunicorn
 resend
+python-slugify
