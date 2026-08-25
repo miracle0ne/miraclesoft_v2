@@ -438,3 +438,44 @@
     }
 
 }
+
+/* =========================================
+   PRODUCT DETAIL INFO FIX
+========================================= */
+
+.product-detail-info {
+    display: block !important;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.product-detail-info > * {
+    max-width: 100%;
+}
+
+.product-detail-description {
+    display: block;
+    width: 100%;
+    line-height: 1.7;
+    overflow-wrap: break-word;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    max-width: 100%;
+}
+
+.product-add-cart {
+    width: 100%;
+}
+
+.product-benefit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
