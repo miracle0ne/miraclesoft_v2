@@ -80,9 +80,22 @@ def login():
   form = LoginForm()
   if form.validate_on_submit():
     
-    user = User.query.filter_by(email=form.email.data).first()
+    user = User.query.filter_by(
+        email=form.email.data.strip().lower()
+    ).first()
 
-    if user and check_password_hash(user.password,form.password.data):
+    print("LOGIN EMAIL:", repr(form.email.data))
+    print("USER FOUND:", user is not None)
+
+    if user:
+        print("PASSWORD OK:", check_password_hash(
+            user.password,
+            form.password.data
+        ))
+        print("EMAIL VERIFIED:", user.email_verified)
+        print("ROLE:", user.role.name if user.role else None)
+
+    if user and check_password_hash(user.password, form.password.data):
       if  user.email_verified is False:
         flash("please  verify your email before continue login","warning")
         return redirect(url_for("auth.login"))
