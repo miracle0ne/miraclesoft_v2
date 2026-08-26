@@ -52,38 +52,6 @@ def edit_product(product_id):
     product.stock = form.stock.data
     product.active = form.active.data
 
-    # Update product specifications
-    existing_specs = {spec.id: spec for spec in product.specifications}
-    submitted_ids = set()
-
-    for spec_form in form.specifications.entries:
-        spec_id = spec_form.form.id.data
-        name = spec_form.form.name.data.strip()
-        value = spec_form.form.value.data.strip()
-
-        if not name or not value:
-            continue
-
-        if spec_id:
-            spec_id = int(spec_id)
-            spec = existing_specs.get(spec_id)
-
-            if spec:
-                spec.name = name
-                spec.value = value
-                submitted_ids.add(spec_id)
-        else:
-            product.specifications.append(
-                ProductSpecification(
-                    name=name,
-                    value=value
-                )
-            )
-
-    for spec_id, spec in existing_specs.items():
-        if spec_id not in submitted_ids:
-            db.session.delete(spec)
-
     # Update image only if a new image is selected
     if form.image.data:
 
