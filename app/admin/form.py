@@ -1,3 +1,4 @@
+from importlib.util import spec_from_file_location
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
@@ -6,13 +7,28 @@ from wtforms import (
     IntegerField,
     BooleanField,
     SubmitField,
-    SelectField
+    SelectField,
+    FieldList,
+    FormField,
+    HiddenField
+    
   
 )
 from flask_wtf.file import FileField, FileAllowed
 
 from wtforms.validators import DataRequired
 
+class SpecificationForm(FlaskForm):
+
+    id = HiddenField()
+
+    name = StringField(
+        "Specification Name"
+    )
+
+    value = StringField(
+        "Specification Value"
+    ) 
 
 class ProductForm(FlaskForm):
 
@@ -44,6 +60,10 @@ class ProductForm(FlaskForm):
     image =FileField(
       "product_image",validators=[
         FileAllowed(["jpg","jpeg","png"],"image only")])
+    specifications=FieldList(
+      FormField(SpecificationForm),
+      min_entries=0
+    )
 
     submit = SubmitField(
         "Save Product"
@@ -79,5 +99,4 @@ class PaymentStatus(FlaskForm):
 
 class DeleteForm(FlaskForm):
   pass
-  
-  
+

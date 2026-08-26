@@ -1,5 +1,6 @@
 from flask import Flask,abort,render_template,request,flash,redirect,url_for, Response
 from flask_login import login_required,current_user
+from sqlalchemy import or_
 from . import shop
 from app.extension import db
 from app.models import Product,Cart,Order,OrderItem
@@ -7,8 +8,30 @@ from .form import CheckoutF
 
 @shop.route("/")
 def home():
-  products= (Product.query.filter_by(active=True).order_by(Product.create_at.desc()).limit(8).all())
-  return render_template("shop/index.html",products=products)
+  q = request.args.get("q", "").strip()
+
+  query = Product.query.filter_by(active=True)
+
+  if q:
+    query = query.filter(
+      or_(
+        Product.name.ilike(f"%{q}%"),
+        Product.description.ilike(f"%{q}%")
+      )
+    )
+
+  products = (
+    query
+    .order_by(Product.create_at.desc())
+    .limit(8)
+    .all()
+  )
+
+  return render_template(
+    "shop/index.html",
+    products=products,
+    search_query=q
+  )
 
 @shop.route("/product/<slug>")
 def product_detail(slug):

@@ -10,7 +10,7 @@
 ================================================== #}
 
 {% block title %}
-{{ product.name }} | ElectroShop Tanzania
+{{ product.name }} | SokoMarket Tanzania
 {% endblock %}
 
 
@@ -20,7 +20,7 @@
 
 {% block meta_description %}
 {{ product.description[:155] if product.description else
-   'Shop ' ~ product.name ~ ' from ElectroShop Tanzania, powered by MiracleSoft Technologies.' }}
+   'Shop ' ~ product.name ~ ' from SokoMarket Tanzania, powered by MiracleSoft Technologies.' }}
 {% endblock %}
 
 
@@ -38,13 +38,13 @@ index, follow
 ================================================== #}
 
 {% block og_title %}
-{{ product.name }} | ElectroShop Tanzania
+{{ product.name }} | SokoMarket Tanzania
 {% endblock %}
 
 
 {% block og_description %}
 {{ product.description[:155] if product.description else
-   'Shop quality electronics and accessories from ElectroShop Tanzania.' }}
+   'Shop quality electronics and accessories from SokoMarket Tanzania.' }}
 {% endblock %}
 
 
@@ -85,13 +85,13 @@ product
 ================================================== #}
 
 {% block twitter_title %}
-{{ product.name }} | ElectroShop Tanzania
+{{ product.name }} | SokoMarket Tanzania
 {% endblock %}
 
 
 {% block twitter_description %}
 {{ product.description[:200] if product.description else
-   'Shop quality electronics and accessories from ElectroShop Tanzania.' }}
+   'Shop quality electronics and accessories from SokoMarket Tanzania.' }}
 {% endblock %}
 
 
@@ -369,6 +369,41 @@ product
 
 
                     <!-- ==================================================
+                         PRODUCT SPECIFICATIONS
+                    ================================================== -->
+
+                    {% if product.specifications %}
+
+                    <div class="product-specifications my-4">
+
+                        <h5 class="fw-bold mb-3">
+                            <i class="bi bi-list-check me-2"></i>
+                            Product Specifications
+                        </h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle mb-0">
+                                <tbody>
+                                    {% for spec in product.specifications %}
+                                    <tr>
+                                        <th class="fw-semibold">
+                                            {{ spec.name }}
+                                        </th>
+                                        <td>
+                                            {{ spec.value }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- ==================================================
                          CART
                     ================================================== -->
 
@@ -566,7 +601,7 @@ product
 
     "brand": {
         "@type": "Brand",
-        "name": "ElectroShop"
+        "name": "SokoMarket"
     },
 
     "offers": {

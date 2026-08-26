@@ -2,6 +2,10 @@
 
 {% block title %}
 Edit Product - Admin
+
+
+
+
 {% endblock %}
 
 {% block content %}
@@ -162,6 +166,56 @@ Edit Product - Admin
 
                     </div>
 
+                    <div class="mb-4">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h5 class="fw-bold mb-1">Product Specifications</h5>
+                                <p class="text-muted small mb-0">
+                                    Add technical details about this product.
+                                </p>
+                            </div>
+
+                            <button type="button"
+                                    class="btn btn-outline-warning btn-sm"
+                                    id="add-specification">
+                                <i class="bi bi-plus-circle me-1"></i>
+                                Add Specification
+                            </button>
+                        </div>
+
+                        <div id="specifications-container">
+                            {% for spec in form.specifications %}
+                                <div class="row g-2 mb-2 specification-row">
+                                    {{ spec.id() }}
+
+                                    <div class="col-12 col-md-5">
+                                        {{ spec.name(
+                                            class="form-control",
+                                            placeholder="Specification Name"
+                                        ) }}
+                                    </div>
+
+                                    <div class="col-12 col-md-5">
+                                        {{ spec.value(
+                                            class="form-control",
+                                            placeholder="Specification Value"
+                                        ) }}
+                                    </div>
+
+                                    <div class="col-12 col-md-2">
+                                        <button type="button"
+                                                class="btn btn-outline-danger w-100 remove-specification">
+                                            <i class="bi bi-trash"></i>
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
                     <div class="p-3 rounded bg-light border mb-4">
 
                         <div class="form-check">
@@ -238,6 +292,54 @@ Edit Product - Admin
     font-size: 2rem;
 }
 
+
+
+#specifications-container .specification-row {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("specifications-container");
+    const addButton = document.getElementById("add-specification");
+
+    if (!container || !addButton) return;
+
+    addButton.addEventListener("click", function () {
+        const index = container.querySelectorAll(".specification-row").length;
+        const row = document.createElement("div");
+
+        row.className = "row g-2 mb-2 specification-row";
+        row.innerHTML = `
+            <input type="hidden" name="specifications-${index}-id" value="">
+            <div class="col-12 col-md-5">
+                <input type="text" name="specifications-${index}-name" class="form-control" placeholder="Specification Name">
+            </div>
+            <div class="col-12 col-md-5">
+                <input type="text" name="specifications-${index}-value" class="form-control" placeholder="Specification Value">
+            </div>
+            <div class="col-12 col-md-2">
+                <button type="button" class="btn btn-outline-danger w-100 remove-specification">
+                    <i class="bi bi-trash"></i> Remove
+                </button>
+            </div>
+        `;
+
+        container.appendChild(row);
+    });
+
+    container.addEventListener("click", function (event) {
+        const button = event.target.closest(".remove-specification");
+        if (button) {
+            button.closest(".specification-row").remove();
+        }
+    });
+});
+</script>
 
 {% endblock %}
