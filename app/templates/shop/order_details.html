@@ -27,7 +27,7 @@ Order #{{ order.id }}
                 </p>
             </div>
 
-            <a href="{{ url_for('shop.my_order') }}"
+            <a href="{{ url_for('shop.my_order) }}"
                class="btn btn-outline-secondary">
 
                 <i class="bi bi-arrow-left me-1"></i>
@@ -175,10 +175,12 @@ Order #{{ order.id }}
 
                                 {% if item.product.image %}
 
-                                <img
-    src="{{ url_for('static', filename='uploads/products/' + item.product.image) }}"
-    alt="{{ item.product.name }}"
->
+                                <img  src="{{ url_for(
+                                        'static',
+                                        filename='uploads/products/' + item.product.image
+                                    ) }}"
+                                    alt="{{ item.product.name }}"
+                                >
 
                                 {% else %}
 

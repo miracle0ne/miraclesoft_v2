@@ -6,138 +6,143 @@ Add Product - Admin
 
 {% block content %}
 
-<div class="container py-5">
+<section class="admin-product-section py-4">
 
-    <div class="row justify-content-center">
+    <div class="container-fluid px-3 px-lg-4">
 
-        <div class="col-lg-8">
+        <!-- HEADER -->
 
-            <div class="card border-0 shadow-sm">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
 
-                <div class="card-header bg-primary text-white">
+            <div>
+                <h2 class="fw-bold mb-1">
+                    <i class="bi bi-box-seam me-2"></i>
+                    Add New Product
+                </h2>
 
-                    <h4 class="mb-0">
-                        Add New Product
-                    </h4>
+                <p class="text-muted mb-0">
+                    Add a new product to your ElectroShop store.
+                </p>
+            </div>
 
-                </div>
+            <a
+                href="{{ url_for('admin.products') }}"
+                class="btn btn-outline-secondary"
+            >
+                <i class="bi bi-arrow-left me-1"></i>
+                Back to Products
+            </a>
 
-                <div class="card-body p-4">
-
-                    <form
-                        method="POST"
-                        enctype="multipart/form-data"
-                    >
-
-                        {{ form.hidden_tag() }}
+        </div>
 
 
-                        <!-- Product Name -->
+        <!-- PRODUCT FORM CARD -->
 
-                        <div class="mb-3">
+        <div class="card border-0 shadow-sm admin-product-card">
 
-                            {{ form.name.label(
+            <div class="card-body p-3 p-md-4 p-lg-5">
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    {{ form.hidden_tag() }}
+
+
+                    <!-- BASIC INFORMATION -->
+
+                    <div class="mb-4">
+
+                        <h5 class="fw-bold mb-1">
+                            Product Information
+                        </h5>
+
+                        <p class="text-muted small mb-0">
+                            Enter the basic details of your product.
+                        </p>
+
+                    </div>
+
+
+                    <!-- PRODUCT NAME -->
+
+                    <div class="mb-4">
+
+                        {{ form.name.label(
+                            class="form-label fw-semibold"
+                        ) }}
+
+                        {{ form.name(
+                            class="form-control form-control-lg",
+                            placeholder="Enter product name"
+                        ) }}
+
+                        {% for error in form.name.errors %}
+
+                            <div class="text-danger small mt-1">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="mb-4">
+
+                        {{ form.description.label(
+                            class="form-label fw-semibold"
+                        ) }}
+
+                        {{ form.description(
+                            class="form-control",
+                            rows="6",
+                            placeholder="Write a detailed product description..."
+                        ) }}
+
+                        {% for error in form.description.errors %}
+
+                            <div class="text-danger small mt-1">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- PRICE + STOCK -->
+
+                    <div class="row g-3 mb-4">
+
+                        <div class="col-12 col-md-6">
+
+                            {{ form.price.label(
                                 class="form-label fw-semibold"
                             ) }}
 
-                            {{ form.name(
-                                class="form-control",
-                                placeholder="Enter product name"
-                            ) }}
+                            <div class="input-group">
 
-                            {% for error in form.name.errors %}
-
-                                <div class="text-danger small">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- Description -->
-
-                        <div class="mb-3">
-
-                            {{ form.description.label(
-                                class="form-label fw-semibold"
-                            ) }}
-
-                            {{ form.description(
-                                class="form-control",
-                                rows="5",
-                                placeholder="Product description"
-                            ) }}
-
-                        </div>
-
-
-                        <!-- Price + Stock -->
-
-                        <div class="row">
-
-                            <div class="col-md-6 mb-3">
-
-                                {{ form.price.label(
-                                    class="form-label fw-semibold"
-                                ) }}
+                                <span class="input-group-text">
+                                    TSh
+                                </span>
 
                                 {{ form.price(
-                                    class="form-control",
+                                    class="form-control form-control-lg",
                                     placeholder="e.g. 600000"
                                 ) }}
 
-                                {% for error in form.price.errors %}
-
-                                    <div class="text-danger small">
-                                        {{ error }}
-                                    </div>
-
-                                {% endfor %}
-
                             </div>
 
+                            {% for error in form.price.errors %}
 
-                            <div class="col-md-6 mb-3">
-
-                                {{ form.stock.label(
-                                    class="form-label fw-semibold"
-                                ) }}
-
-                                {{ form.stock(
-                                    class="form-control",
-                                    placeholder="e.g. 10"
-                                ) }}
-
-                                {% for error in form.stock.errors %}
-
-                                    <div class="text-danger small">
-                                        {{ error }}
-                                    </div>
-
-                                {% endfor %}
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Image -->
-
-                        <div class="mb-3">
-
-                            {{ form.image.label(
-                                class="form-label fw-semibold"
-                            ) }}
-
-                            {{ form.image(
-                                class="form-control"
-                            ) }}
-
-                            {% for error in form.image.errors %}
-
-                                <div class="text-danger small">
+                                <div class="text-danger small mt-1">
+                                    <i class="bi bi-exclamation-circle me-1"></i>
                                     {{ error }}
                                 </div>
 
@@ -146,41 +151,110 @@ Add Product - Admin
                         </div>
 
 
-                        <!-- Active -->
+                        <div class="col-12 col-md-6">
 
-                        <div class="form-check mb-4">
+                            {{ form.stock.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-boxes"></i>
+                                </span>
+
+                                {{ form.stock(
+                                    class="form-control form-control-lg",
+                                    placeholder="e.g. 10"
+                                ) }}
+
+                            </div>
+
+                            {% for error in form.stock.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    <i class="bi bi-exclamation-circle me-1"></i>
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-image me-1"></i>
+                            Product Image
+                        </label>
+
+                        {{ form.image(
+                            class="form-control form-control-lg"
+                        ) }}
+
+                        <div class="form-text">
+                            Upload a clear image of the product.
+                        </div>
+
+                        {% for error in form.image.errors %}
+
+                            <div class="text-danger small mt-1">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- ACTIVE -->
+
+                    <div class="p-3 rounded bg-light border mb-4">
+
+                        <div class="form-check">
 
                             {{ form.active(
                                 class="form-check-input"
                             ) }}
 
                             {{ form.active.label(
-                                class="form-check-label"
+                                class="form-check-label fw-semibold"
                             ) }}
 
                         </div>
 
+                        <small class="text-muted ms-4">
+                            Active products are visible to customers.
+                        </small>
 
-                        <!-- Buttons -->
+                    </div>
 
-                        <div class="d-flex gap-2">
 
-                            <a
-                                href="{{ url_for('admin.products') }}"
-                                class="btn btn-secondary"
-                            >
-                                Cancel
-                            </a>
+                    <!-- ACTIONS -->
 
-                            {{ form.submit(
-                                class="btn btn-primary"
-                            ) }}
+                    <div class="d-flex flex-column flex-sm-row gap-2 pt-2">
 
-                        </div>
+                        <a
+                            href="{{ url_for('admin.products') }}"
+                            class="btn btn-outline-secondary btn-lg px-4"
+                        >
+                            <i class="bi bi-x-circle me-1"></i>
+                            Cancel
+                        </a>
 
-                    </form>
+                        {{ form.submit(
+                            class="btn btn-warning btn-lg px-4 fw-bold"
+                        ) }}
 
-                </div>
+                    </div>
+
+                </form>
 
             </div>
 
@@ -188,6 +262,47 @@ Add Product - Admin
 
     </div>
 
-</div>
+</section>
+
+
+<style>
+
+.admin-product-card {
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.admin-product-section .form-control,
+.admin-product-section .input-group-text {
+    border-color: #dee2e6;
+}
+
+.admin-product-section .form-control:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 0 .2rem rgba(255, 193, 7, .15);
+}
+
+.admin-product-section .input-group-text {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+
+    .admin-product-section {
+        padding-top: 20px !important;
+    }
+
+    .admin-product-section h2 {
+        font-size: 1.45rem;
+    }
+
+    .admin-product-card .card-body {
+        padding: 20px !important;
+    }
+
+}
+
+</style>
 
 {% endblock %}

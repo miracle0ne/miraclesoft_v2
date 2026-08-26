@@ -11,7 +11,7 @@ class Product(db.Model):
   image=db.Column(db.String(255),nullable=True,default="default.png")
   stock =db.Column(db.Integer,default=0)
   active =db.Column(db.Boolean)
-  create_at =db.Column(db.DateTime,default=datetime.utcnow)
+  create_at =db.Column(db.DateTime,default=datetime.utcnow())
   cart_item=db.relationship("Cart",back_populates="product")
   def ___repr__(self):
     return f"<Product {{self.name}}>"
