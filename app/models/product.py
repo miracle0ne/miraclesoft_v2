@@ -14,6 +14,7 @@ class Product(db.Model):
   create_at =db.Column(db.DateTime,default=datetime.utcnow())
   cart_item=db.relationship("Cart",back_populates="product")
   specifications = db.relationship("ProductSpecification", back_populates="product", cascade="all, delete-orphan")
+  reviews = db.relationship("Review", back_populates="product", cascade="all, delete-orphan")
   def ___repr__(self):
     return f"<Product {{self.name}}>"
   

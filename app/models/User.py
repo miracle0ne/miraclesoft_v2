@@ -35,3 +35,4 @@ class User(db.Model, UserMixin):
     back_populates="user",
     cascade="all, delete-orphan")
   orders= db.relationship("Order", back_populates="user")
+  reviews = db.relationship("Review", back_populates="user", cascade="all, delete-orphan")
