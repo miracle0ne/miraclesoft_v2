@@ -2,6 +2,7 @@ from flask import (render_template,redirect,request,url_for,flash,session,curren
 from werkzeug.security import (generate_password_hash,check_password_hash)
 from app.models.User import User
 from app.models.role import Role
+from app.models.admin_notification import AdminNotification
 from app.auth import auth
 from app.extension import db
 import secrets
@@ -31,7 +32,20 @@ def register():
     email_verification_token=generate_token()
     )
     db.session.add(user)
+
+    # ==========================================
+    # ADMIN NOTIFICATION - NEW USER
+    # ==========================================
+
+    notification = AdminNotification(
+        title="New User",
+        message=f"New user {user.name} has registered.",
+        notification_type="user"
+    )
+
+    db.session.add(notification)
     db.session.commit()
+
     verification_email(user)
     flash("account create succesfuly"
          

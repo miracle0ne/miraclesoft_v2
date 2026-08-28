@@ -1,7 +1,8 @@
+from decimal import Decimal
 from flask import render_template,flash,redirect,url_for
 from flask_login import login_required
 
-from app.models import Product,Order,User
+from app.models import Product,Order,User,AdminNotification,Commission
 from . import admin
 from .Decorator import admin_requred
 from .form import ProductForm,StatusForm,PaymentStatus,DeleteForm 
@@ -184,21 +185,103 @@ def update_payment_status(order_id):
 
   if form.validate_on_submit():
 
-    order.payment_status = form.payment_status.data
+    print("PAYMENT DEBUG:", order.id, "OLD:", order.payment_status, "NEW:", form.payment_status.data)
+
+    old_status = order.payment_status
+    new_status = form.payment_status.data
+
+    order.payment_status = new_status
+
+    # ==========================================
+    # MIRACLESOFT 5% COMMISSION
+    # ==========================================
+
+    if new_status == "paid" and old_status != "paid":
+
+      existing_commission = Commission.query.filter_by(
+        order_id=order.id
+      ).first()
+
+      if not existing_commission:
+
+        commission_amount = order.total * Decimal("0.05")
+
+        commission = Commission(
+          order_id=order.id,
+          sale_amount=order.total,
+          commission_rate=5.00,
+          commission_amount=commission_amount
+        )
+
+        db.session.add(commission)
 
     db.session.commit()
 
     flash(
-       f"Order #{order.id} payment status updated successfully",
-            "success"
-      )
+      f"Order #{order.id} payment status updated successfully",
+      "success"
+    )
 
   else:
-    print("payment_erros",form.errors)
+
+    print("payment_erros", form.errors)
+
     flash(
-          
-            f"Invalid payment status: {form.errors}",
-            "danger"
-        )
+      f"Invalid payment status: {form.errors}",
+      "danger"
+    )
 
   return redirect(url_for("admin.orders"))
+
+@admin.route("/notifications")
+@login_required
+def notifications():
+
+  notifications = AdminNotification.query.order_by(
+    AdminNotification.created_at.desc()
+  ).all()
+
+  return render_template(
+    "admin/notifications.html",
+    notifications=notifications
+  )
+
+@admin.route("/notifications/<int:notification_id>/read")
+@login_required
+def mark_notification_read(notification_id):
+
+  notification = AdminNotification.query.get_or_404(
+    notification_id
+  )
+
+  notification.is_read = True
+
+  db.session.commit()
+
+  if notification.notification_type == "order":
+    return redirect(url_for("admin.orders"))
+
+  return redirect(url_for("admin.notifications"))
+
+@admin.route("/notifications/unread")
+@login_required
+def unread_notifications_api():
+
+  notifications = AdminNotification.query.filter_by(
+    is_read=False
+  ).order_by(
+    AdminNotification.created_at.desc()
+  ).all()
+
+  return {
+    "count": len(notifications),
+    "notifications": [
+      {
+        "id": n.id,
+        "title": n.title,
+        "message": n.message,
+        "type": n.notification_type
+      }
+      for n in notifications
+    ]
+  }

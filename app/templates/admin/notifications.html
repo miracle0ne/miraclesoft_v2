@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="mb-4">
+        <h3 class="fw-bold mb-1">
+            <i class="bi bi-bell me-2"></i>
+            Notifications
+        </h3>
+
+        <p class="text-muted mb-0">
+            Stay updated with activity on SokoMarket.
+        </p>
+    </div>
+
+
+    {% if notifications %}
+
+        {% for notification in notifications %}
+
+        <a href="{{ url_for(
+            'admin.mark_notification_read',
+            notification_id=notification.id
+        ) }}"
+           class="text-decoration-none text-dark">
+
+            <div class="card border-0 shadow-sm mb-3
+                        {% if not notification.is_read %}
+                        notification-unread
+                        {% endif %}">
+
+                <div class="card-body p-3 p-md-4">
+
+                    <div class="d-flex align-items-start">
+
+                        <!-- ICON -->
+                        <div class="notification-icon me-3">
+
+                            {% if notification.notification_type == "order" %}
+
+                                <i class="bi bi-cart-check-fill"></i>
+
+                            {% elif notification.notification_type == "user" %}
+
+                                <i class="bi bi-person-plus-fill"></i>
+
+                            {% else %}
+
+                                <i class="bi bi-bell-fill"></i>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- CONTENT -->
+                        <div class="flex-grow-1">
+
+                            <div class="d-flex justify-content-between
+                                        align-items-start gap-2">
+
+                                <h6 class="fw-bold mb-1">
+
+                                    {{ notification.title }}
+
+                                    {% if not notification.is_read %}
+
+                                    <span class="badge bg-danger ms-1">
+                                        New
+                                    </span>
+
+                                    {% endif %}
+
+                                </h6>
+
+                                <small class="text-muted text-nowrap">
+                                    {{ notification.created_at.strftime(
+                                        "%d %b %Y, %H:%M"
+                                    ) }}
+                                </small>
+
+                            </div>
+
+                            <p class="text-muted mb-0">
+                                {{ notification.message }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    {% else %}
+
+        <!-- EMPTY STATE -->
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center py-5">
+
+                <i class="bi bi-bell-slash fs-1 text-muted"></i>
+
+                <h5 class="fw-bold mt-3">
+                    No notifications
+                </h5>
+
+                <p class="text-muted mb-0">
+                    You're all caught up.
+                </p>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<style>
+
+.notification-unread {
+    border-left: 4px solid #f59e0b !important;
+    background: #fffaf0;
+}
+
+.notification-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f59e0b;
+    color: #fff;
+
+    font-size: 20px;
+}
+
+.card {
+    transition: transform .2s ease,
+                box-shadow .2s ease;
+}
+
+a:hover .card {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 576px) {
+
+    .notification-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 17px;
+    }
+
+    small.text-nowrap {
+        white-space: normal !important;
+    }
+
+}
+
+</style>
+
+{% endblock %}

@@ -1,6 +1,8 @@
 from flask import Flask,render_template
+from flask_login import current_user
 from .config import Config
 from app.models.User import User
+from app.models.admin_notification import AdminNotification
 from .extension import (
   db,
   migrate,
@@ -13,6 +15,17 @@ def load_user(user_id):
   return User.query.get(int(user_id))
 def create_app():
   app=Flask(__name__)
+
+  @app.context_processor
+  def inject_admin_notifications():
+    if current_user.is_authenticated and current_user.role:
+      if current_user.role.name.lower() == "admin":
+        unread_notifications = AdminNotification.query.filter_by(
+          is_read=False
+        ).count()
+        return dict(unread_notifications=unread_notifications)
+
+    return dict(unread_notifications=0)
   app.config.from_object(Config)
   
   db.init_app(app)

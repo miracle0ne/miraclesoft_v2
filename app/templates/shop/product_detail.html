@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}">
+
+<!-- CUSTOMER REVIEWS -->
+
+
+
+
 {% endblock %}
 
 
@@ -566,6 +572,218 @@ product
   </div>
 
 
+
+</section>
+
+
+
+
+<section class="product-reviews-section">
+
+    <div class="container">
+
+        <div class="product-reviews">
+
+            <div class="reviews-header">
+
+                <h3>
+                    Customer Reviews
+                </h3>
+
+                <p>
+                    Share your experience with this product.
+                </p>
+
+            </div>
+
+
+            {% if can_review %}
+
+    <!-- VERIFIED CUSTOMER REVIEW FORM -->
+
+    <div class="review-form-card">
+
+        <div class="d-flex align-items-center gap-2 mb-3">
+
+            <i class="bi bi-patch-check-fill text-success fs-4"></i>
+
+            <h5 class="mb-0">
+                Write a Review
+            </h5>
+
+        </div>
+
+        <p class="text-muted small mb-4">
+            Thank you for purchasing this product.
+            Share your experience with other customers.
+        </p>
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'shop.add_review',
+                slug=product.slug
+            ) }}"
+        >
+
+            {{ review_form.hidden_tag() }}
+
+            <div class="review-field">
+
+                {{ review_form.rating.label(
+                    class="form-label"
+                ) }}
+
+                {{ review_form.rating(
+                    class="form-select"
+                ) }}
+
+            </div>
+
+            <div class="review-field">
+
+                {{ review_form.comment.label(
+                    class="form-label"
+                ) }}
+
+                {{ review_form.comment(
+                    class="form-control",
+                    rows="4",
+                    placeholder="Tell us about your experience..."
+                ) }}
+
+            </div>
+
+            {{ review_form.submit(
+                class="btn btn-warning review-submit"
+            ) }}
+
+        </form>
+
+    </div>
+
+{% elif already_reviewed %}
+
+    <!-- ALREADY REVIEWED -->
+
+    <div class="review-login review-success">
+
+        <i class="bi bi-check-circle-fill text-success"></i>
+
+        <span>
+            You have already reviewed this product.
+            Thank you for your feedback.
+        </span>
+
+    </div>
+
+{% elif current_user.is_authenticated %}
+
+    <!-- NOT ELIGIBLE -->
+
+    <div class="review-login">
+
+        <i class="bi bi-info-circle-fill text-warning"></i>
+
+        <span>
+            {{ review_message }}
+        </span>
+
+    </div>
+
+{% else %}
+
+    <!-- LOGIN REQUIRED -->
+
+    <div class="review-login">
+
+        <i class="bi bi-person-circle"></i>
+
+        <span>
+            Please
+            <a href="{{ url_for('auth.login') }}">
+                login
+            </a>
+            to review this product.
+        </span>
+
+    </div>
+
+{% endif %}
+
+<div class="reviews-list">
+
+                {% if reviews %}
+
+                    {% for review in reviews %}
+
+                    <article class="review-item">
+
+                        <div class="review-top">
+
+                            <div>
+
+                                <strong>
+                                    {{ review.user.name }}
+                                </strong>
+
+                                <div class="review-stars">
+
+                                    {% for i in range(review.rating) %}
+                                        <i class="bi bi-star-fill"></i>
+                                    {% endfor %}
+
+                                    {% for i in range(5 - review.rating) %}
+                                        <i class="bi bi-star"></i>
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+
+
+                            <time>
+
+                                {{ review.created_at.strftime(
+                                    '%d %b %Y'
+                                ) }}
+
+                            </time>
+
+                        </div>
+
+
+                        <p class="review-comment">
+                            {{ review.comment }}
+                        </p>
+
+                    </article>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="no-reviews">
+
+                        <i class="bi bi-chat-square-text"></i>
+
+                        <h5>
+                            No reviews yet
+                        </h5>
+
+                        <p>
+                            Be the first to review this product.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 

@@ -313,15 +313,18 @@
 
     .product-detail-image-card {
         min-height: 320px;
-        height: 320px;
-
+        height: auto;
+        aspect-ratio: 1 / 1;
         border-radius: 15px;
+        overflow: hidden;
     }
 
     .product-detail-image {
-        height: 320px;
-        padding: 5px;
-        object-fit:contain;
+        width: 100%;
+        height: 100%;
+        padding: 12px;
+        object-fit: contain;
+        display: block;
     }
 
     .product-no-image {
@@ -400,13 +403,16 @@
     }
 
     .product-detail-image-card {
-        height: 290px;
         min-height: 290px;
+        height: auto;
+        aspect-ratio: 1 / 1;
     }
 
     .product-detail-image {
-        height: 290px;
-        padding: 5px;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        object-fit: contain;
     }
 
     .product-no-image {
@@ -479,3 +485,340 @@
     height: 100%;
 }
 
+
+
+/* ==================================================
+   CUSTOMER REVIEWS
+================================================== */
+
+.product-reviews {
+    width: 100%;
+    margin-top: 60px;
+}
+
+.product-reviews .border-top {
+    border-top: 1px solid #e5e5e5 !important;
+}
+
+.product-reviews h3 {
+    font-size: 1.7rem;
+    color: #212529;
+}
+
+.product-reviews .card {
+    max-width: 760px;
+    border-radius: 14px;
+}
+
+.product-reviews .card-body {
+    padding: 28px;
+}
+
+.product-reviews .form-label {
+    color: #343a40;
+}
+
+.product-reviews .form-select,
+.product-reviews .form-control {
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.product-reviews .form-select:focus,
+.product-reviews .form-control:focus {
+    box-shadow: none;
+    border-color: #f5a623;
+}
+
+.product-reviews .btn-warning {
+    border-radius: 10px;
+    padding: 11px 22px;
+}
+
+.product-reviews .alert {
+    max-width: 760px;
+    border-radius: 10px;
+}
+
+.product-reviews > .border-top > div:last-child {
+    max-width: 760px;
+}
+
+.product-reviews .text-warning {
+    letter-spacing: 2px;
+}
+
+@media (max-width: 767px) {
+
+    .product-reviews {
+        margin-top: 40px;
+    }
+
+    .product-reviews h3 {
+        font-size: 1.4rem;
+    }
+
+    .product-reviews .card-body {
+        padding: 20px;
+    }
+
+    .product-reviews .d-flex {
+        gap: 12px;
+    }
+
+}
+
+
+/* ==================================================
+   PRODUCT REVIEWS LAYOUT
+================================================== */
+
+.product-reviews-section {
+    width: 100%;
+    margin-top: 70px;
+    padding: 0 0 70px;
+}
+
+.product-reviews {
+    width: 100%;
+}
+
+.reviews-header {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 45px;
+    margin-bottom: 30px;
+}
+
+.reviews-header h3 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.reviews-header p {
+    margin: 8px 0 0;
+    color: #6c757d;
+}
+
+
+/* REVIEW FORM */
+
+.review-form-card {
+    max-width: 760px;
+    padding: 28px;
+    margin-bottom: 45px;
+    background: #fff;
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+}
+
+.review-form-card h5 {
+    margin-bottom: 22px;
+    font-weight: 700;
+}
+
+.review-field {
+    margin-bottom: 18px;
+}
+
+.review-field .form-select,
+.review-field .form-control {
+    border-radius: 10px;
+    padding: 11px 13px;
+}
+
+.review-submit {
+    margin-top: 5px;
+    border-radius: 9px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+
+
+/* LOGIN */
+
+.review-login {
+    max-width: 760px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    background: #fafafa;
+}
+
+.review-login i {
+    margin-right: 8px;
+}
+
+.review-login a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+/* REVIEWS LIST */
+
+.reviews-list {
+    max-width: 900px;
+}
+
+.review-item {
+    padding: 24px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.review-stars {
+    margin-top: 5px;
+    letter-spacing: 2px;
+}
+
+.review-top time {
+    color: #888;
+    font-size: .85rem;
+    white-space: nowrap;
+}
+
+.review-comment {
+    margin: 14px 0 0;
+    color: #555;
+    line-height: 1.7;
+}
+
+
+/* EMPTY STATE */
+
+.no-reviews {
+    max-width: 760px;
+    padding: 40px 20px;
+    text-align: center;
+    border: 1px dashed #dddddd;
+    border-radius: 12px;
+}
+
+.no-reviews i {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 2.5rem;
+    color: #999;
+}
+
+.no-reviews h5 {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.no-reviews p {
+    margin: 0;
+    color: #777;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+    .product-reviews-section {
+        margin-top: 45px;
+        padding-bottom: 45px;
+    }
+
+    .reviews-header {
+        padding-top: 30px;
+    }
+
+    .reviews-header h3 {
+        font-size: 1.4rem;
+    }
+
+    .review-form-card {
+        padding: 20px;
+    }
+
+    .review-top {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .review-top time {
+        font-size: .8rem;
+    }
+
+}
+
+/* ==================================================
+   FINAL PRODUCT IMAGE FIX
+================================================== */
+
+.product-detail-image-card {
+    width: 100%;
+    min-height: 500px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-detail-image {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain !important;
+    object-position: center;
+    padding: 15px;
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+    .product-detail-image-card {
+        min-height: 420px;
+    }
+
+    .product-detail-image {
+        max-height: 420px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+    .product-detail-image-card {
+        width: 100%;
+        min-height: 320px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .product-detail-image {
+        width: 100%;
+        height: auto !important;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 12px;
+        object-fit: contain !important;
+    }
+}
+
+/* SMALL PHONES */
+@media (max-width: 575.98px) {
+    .product-detail-image-card {
+        min-height: 290px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .product-detail-image {
+        padding: 10px;
+    }
+}
+
+
+/* ==================================================
